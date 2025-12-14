@@ -10,7 +10,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: redis1
-  namespace: roboshop
+  #namespace: roboshop
   labels:
     environment: nginx
     project: roboshop
