@@ -18,7 +18,7 @@ spec:
         labels:
            envronment:  roboshop-dev
       spec:
-        nodeSelctor:
+        nodeSelector:
           topology.kubernetes.io/zone=us-east-1d
         containers:
         - name: nginx
