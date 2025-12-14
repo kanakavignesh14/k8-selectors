@@ -13,7 +13,8 @@ spec:
           # we have 2 nodes in same AZ then using disk labels we can distinguish
             operator: In
             values:
-            - us-east-1b
+            - us-east-1b.  # in this zone actually we have 2 nodes either if we use hard rule and distingish them with ssd or hardrive to disk 
+                           # or using soft rule to get one final node. higher the weight more preference goes to it
           # - key: disktype
           #   operator: In
           #   values:
