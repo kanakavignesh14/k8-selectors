@@ -19,7 +19,7 @@ spec:
       tolerations:
       - key: "project"
         operator: "Equal"
-        value: "roboshop"
+        value: "roboshp"
         effect: "NoSchedule"
       containers:
       - name: nginx
