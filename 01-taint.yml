@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: deployment-pod
+   # these are replica set labels
+   labels:
+      envronment:  deployment-dev
+
+spec:
+   replicas: 1
+   # these labels are used to select pods
+   selector: 
+      matchLabels:
+           envronment:  roboshop-dev
+#like pod defination we are not giving pod name here
+   template:
+      metadata:
+        labels:
+           envronment:  roboshop-dev
+      spec:
+        containers:
+        - name: nginx
+          image: nginx     
+ 
+---
+
+apiVersion: v1
+kind: Service
+metadata: 
+   name: nginx  # service name
+
+
+spec:
+  selector:
+     envronment:  roboshop-dev
+  ports:
+     - protocol: TCP
+       port: 80 # sevice port
+       targetPort: 80 # container port   forwart req to another container
