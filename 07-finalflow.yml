@@ -16,14 +16,17 @@ metadata:
     project: roboshop
 spec:
   nodeSelector:
-      server: primary
-      tolerations:
-      - key: "server"
-        operator: "Equal"
-        value: "primary"
-        effect: "NoSchedule"
+    server: primary
+
+  tolerations:
+  - key: "server"
+    operator: "Equal"
+    value: "primary"
+    effect: "NoSchedule"
+
   containers:
   - name: nginx
     image: nginx
     ports:
     - containerPort: 80
+
