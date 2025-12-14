@@ -1,0 +1,29 @@
+# redis1 ---> node 1
+#redis2 ---> node 2
+
+#webserver app1 ----> redis 1
+#webserver app2 ----->present in redis2 but not with app1
+#  ip-192-168-8-237.ec2.internal    node 1
+#  ip-192-168-45-212.ec2.internal   node 2
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis1
+  namespace: roboshop
+  labels:
+    environment: nginx
+    project: roboshop
+spec:
+  nodeSelector:
+      server: primary
+      tolerations:
+      - key: "server"
+        operator: "Equal"
+        value: "primary"
+        effect: "NoSchedule"
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
