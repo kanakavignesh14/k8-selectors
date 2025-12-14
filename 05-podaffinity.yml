@@ -4,10 +4,35 @@ metadata:
   name: nginxx
   #namespace: roboshop
   labels:
-    app1: pod1
+    app: pod-1
 spec:
   containers:
   - name: nginx
     image: nginx
     ports:
     - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2
+  labels:
+    app: pod-2
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        # pod labels
+      - labelSelector:
+          matchExpressions:
+          - key: app   # this should match pod 1 labels
+            operator: In
+            values:
+            - pod-1
+        topologyKey: topology.kubernetes.io/zone # syntax only
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: Always
