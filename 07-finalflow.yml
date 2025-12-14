@@ -46,3 +46,49 @@ spec:
     ports:
     - containerPort: 6379
 
+---
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web1
+  #namespace: roboshop
+  labels:
+    webserver: nginx-1
+spec:
+  nodeSelector:
+    server: primary
+
+  tolerations:
+  - key: "server"
+    operator: "Equal"
+    value: "primary"
+    effect: "NoSchedule"
+
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web2
+  #namespace: roboshop
+  labels:
+    webserver: nginx-2
+spec:
+  nodeSelector:
+    server: secondary
+
+
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+
